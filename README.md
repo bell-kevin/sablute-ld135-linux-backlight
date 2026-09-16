@@ -1,3 +1,5 @@
+<a name="readme-top"></a>
+
 # SABLUTE LD-135 Linux Backlight
 
 Set a SABLUTE LD-135 keyboard to steady white when you sign in to Linux.
@@ -188,3 +190,5 @@ local observations behind this implementation.
 ## License
 
 GNU Affero General Public License, version 3. See [LICENSE](LICENSE).
+
+<p align="left"><a href="#readme-top">back to top</a></p>
