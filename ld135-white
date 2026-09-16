@@ -1,0 +1,4 @@
+#!/bin/sh
+# SPDX-License-Identifier: AGPL-3.0-only
+# Project: sablute-ld135-linux-backlight
+exec /usr/bin/python3 -I /usr/local/lib/ld135-white/keyboard_white.py "$@"

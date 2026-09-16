@@ -1,0 +1,11 @@
+[Desktop Entry]
+# SPDX-License-Identifier: AGPL-3.0-only
+# Project: sablute-ld135-linux-backlight
+Type=Application
+Version=1.0
+Name=White keyboard at login
+Comment=Set the SABLUTE keyboard to white once when you sign in
+Exec=/usr/local/bin/ld135-white --wait 30
+TryExec=/usr/local/bin/ld135-white
+Terminal=false
+X-GNOME-Autostart-enabled=true

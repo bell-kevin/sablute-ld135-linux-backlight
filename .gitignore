@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.coverage
+htmlcov/
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Local investigation material; public evidence is summarized in PROTOCOL.md.
+/research/
+/inspect_keyboard.py
+/test_live_lighting.py
+
+# Local test output and screenshots.
+/test-results/
+/playwright-report/
+/site-artifacts/

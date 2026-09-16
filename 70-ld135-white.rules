@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Project: sablute-ld135-linux-backlight
+# Give the active local desktop user access to this keyboard's lighting interface.
+# Separate rules match USB device and interface attributes on different parents.
+ACTION!="remove", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="30fa", ATTRS{idProduct}=="2052", ENV{.LD135_WHITE_DEVICE}="1"
+ACTION!="remove", SUBSYSTEM=="hidraw", ENV{.LD135_WHITE_DEVICE}=="1", ATTRS{bInterfaceNumber}=="01", TAG+="uaccess"
