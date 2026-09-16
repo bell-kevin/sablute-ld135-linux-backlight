@@ -1,0 +1,52 @@
+name: Report a problem
+description: Help diagnose discovery, permissions, lighting, or login startup.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check the README's troubleshooting section first. Remove personal
+        paths and unrelated device information from output. Do not include
+        passwords, access tokens, or keystroke captures. Security reports belong
+        in the private reporting form linked in SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: Project version or commit
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Keyboard and desktop
+      description: Model label, USB vendor/product ID, Linux distribution, architecture, and desktop environment.
+      placeholder: SABLUTE LD-135, 30fa:2052, Ubuntu 24.04, x86_64, GNOME
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part is failing?
+      options:
+        - Device discovery
+        - Device access or permissions
+        - Setting white
+        - Automatic startup at graphical login
+        - Installation, upgrade, or removal
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected result, and actual result
+      description: Include whether manual Fn + 2 still changes colors.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Relevant command output
+      description: Paste output from ld135-white --dry-run and, if access works, ld135-white --status. Both are read-only.
+      render: text

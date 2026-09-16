@@ -7,7 +7,8 @@ manual changes alone.
 
 ## Report a problem
 
-Open an [issue](https://github.com/bell-kevin/sablute-ld135-linux-backlight/issues)
+Choose the bug or hardware compatibility form when opening an
+[issue](https://github.com/bell-kevin/sablute-ld135-linux-backlight/issues/new/choose)
 with the keyboard's model label, USB VID/PID, Linux distribution, architecture,
 desktop environment, and the command output. State whether manual Fn + 2 works
 and whether the problem concerns discovery, permissions, setting white, or login

@@ -1,0 +1,52 @@
+name: Share a hardware compatibility report
+description: Report a tested LD-135 revision or identify an unsupported device.
+title: "[Hardware]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Matching a product name or USB ID does not establish compatibility.
+        Begin with the read-only discovery command; keep the descriptor check
+        in place. Do not try packets from another keyboard or edit device checks
+        to bypass a refusal. A report does not automatically add support.
+  - type: input
+    id: model
+    attributes:
+      label: Model and revision shown on the keyboard
+      description: Include the revision if printed. Do not include a serial number.
+    validations:
+      required: true
+  - type: input
+    id: usb_id
+    attributes:
+      label: USB vendor and product ID
+      placeholder: "30fa:2052"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Linux distribution, architecture, and desktop
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Project version or commit
+    validations:
+      required: true
+  - type: textarea
+    id: discovery
+    attributes:
+      label: Read-only discovery output
+      description: Run python3 keyboard_white.py --dry-run from the checkout, or ld135-white --dry-run after installation. Remove personal paths.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: observations
+    attributes:
+      label: What have you actually verified?
+      description: Distinguish discovery, setting white, brightness preservation, Fn + 2, reboot/login, full power disconnection, resume, and reconnect. Mark anything untested. Do not run a write test if discovery rejects the device.
+    validations:
+      required: true
