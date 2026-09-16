@@ -24,9 +24,12 @@ function showColor(index) {
     `Preview color: ${color.name.toLowerCase()}. Your keyboard has not been changed.`;
 }
 
-document.querySelector(".preview-controls").hidden = false;
-document.querySelector(".interactive-caption").hidden = false;
-document.getElementById("cycle-color").addEventListener("click", () => {
+// Enhance the native HTML/CSS picker with the original one-click cycle.
+document.getElementById("preview-palette").reset();
+const cycleButton = document.getElementById("cycle-color");
+cycleButton.removeAttribute("popovertarget");
+cycleButton.setAttribute("aria-label", "Cycle the keyboard preview color");
+cycleButton.addEventListener("click", () => {
   showColor((colorIndex + 1) % colors.length);
 });
 document.getElementById("reset-color").addEventListener("click", () => showColor(0));
@@ -36,7 +39,7 @@ document.getElementById("reset-color").addEventListener("click", () => showColor
 // no requests, analytics, or device APIs are used.
 if (navigator.clipboard && window.isSecureContext) {
   document.querySelectorAll("[data-copy]").forEach((button) => {
-    button.hidden = false;
+    button.removeAttribute("popovertarget");
     const label = button.textContent;
     let resetTimer;
     button.addEventListener("click", async () => {

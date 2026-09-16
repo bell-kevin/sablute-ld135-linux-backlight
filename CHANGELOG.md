@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Keep the website's full layout with JavaScript disabled, including native
+  theme and preview color controls and instructions for copying commands.
 - Add Auto, Dark, and Light website themes. Auto follows the operating system;
   explicit preferences are remembered for future visits.
 

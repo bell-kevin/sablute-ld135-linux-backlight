@@ -5,14 +5,16 @@
 (() => {
   const storageKey = "ld135-backlight-theme";
   const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
-  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const themeColors = document.querySelectorAll('meta[name="theme-color"]');
   let preference = "auto";
   let select;
 
   function updateBrowserColor() {
     const dark = preference === "dark" ||
       (preference === "auto" && systemTheme.matches);
-    themeColor.content = dark ? "#151c18" : "#f5f5ef";
+    themeColors.forEach((meta) => {
+      meta.content = dark ? "#151c18" : "#f5f5ef";
+    });
   }
 
   function applyTheme(value) {
@@ -47,6 +49,5 @@
         // Keep the selected theme for this visit even if it cannot be saved.
       }
     });
-    document.querySelector(".theme-control").hidden = false;
   });
 })();

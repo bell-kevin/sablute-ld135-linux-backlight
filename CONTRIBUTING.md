@@ -33,6 +33,37 @@ validates the desktop entry and udev rule, and checks website metadata, local
 links, and assets. The website check uses only the standard library and makes
 no network requests.
 
+Website changes can also be checked in a real browser with optional developer
+tools. These are not required to run the helper or serve the website:
+
+```sh
+python3 -m venv /tmp/ld135-browser-check
+/tmp/ld135-browser-check/bin/python -m pip install playwright
+/tmp/ld135-browser-check/bin/python -m playwright install chromium
+/tmp/ld135-browser-check/bin/python tools/check_site_browser.py
+```
+
+The shared HTML and CSS render the same page with or without JavaScript. Without
+JavaScript, the theme selector follows the OS in Auto mode or changes the theme
+for the current page, the preview button opens a native color chooser, and copy
+buttons explain how to select and copy commands. JavaScript adds saved theme
+preferences, one-click color cycling, and clipboard copying.
+
+The browser check serves `docs/` on a temporary localhost port. It compares full
+page screenshots with JavaScript enabled and disabled at four mobile/desktop
+widths in both OS themes, then checks automatic and manual themes, preview colors,
+resetting, copy controls, and horizontal overflow. To check another engine,
+install its Playwright browser and pass `--browser firefox` or `--browser webkit`.
+Chromium checks the system clipboard; other engines check the text sent to the
+clipboard API because their browser permission support differs.
+
+To verify that a change preserves the original JavaScript appearance, copy the
+previous `docs/` directory outside the repository before editing and pass that
+directory with `--baseline-directory /path/to/previous-docs`. The check compares
+both versions using the same browser and saves differing screenshots in a
+temporary directory if a comparison fails. Browser downloads require network
+access; the check itself only serves and requests local website files.
+
 Changes to the write path should cover failure behavior as well as successful
 selection: identity mismatches must prevent writes, short or failed writes must
 not be retried, and verification must preserve unrelated lighting fields.
