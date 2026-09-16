@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#f5f5ef">
+  <meta name="theme-color" content="#f5f5ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#151c18" media="(prefers-color-scheme: dark)">
   <meta name="description" content="A small Linux helper that sets the SABLUTE LD-135 keyboard to white at graphical login. Keeps your brightness and Fn + 2 controls. No background process or Python dependencies.">
   <link rel="canonical" href="https://bell-kevin.github.io/sablute-ld135-linux-backlight/">
   <title>LD-135 Backlight — White when you sign in.</title>
@@ -25,7 +26,7 @@
       <a href="#compatibility">Compatibility</a>
       <a class="nav-source" href="https://github.com/bell-kevin/sablute-ld135-linux-backlight">Source <span aria-hidden="true">↗</span></a>
     </nav>
-    <label class="theme-control" hidden>
+    <label class="theme-control">
       <span>Theme</span>
       <select id="theme-select" aria-label="Website theme">
         <option value="auto">Auto</option>
@@ -49,7 +50,7 @@
       </div>
 
       <div class="preview" aria-label="Keyboard lighting preview">
-        <div class="preview-topline"><span class="preview-label">SABLUTE LD-135</span><span class="preview-state"><span class="preview-dot" aria-hidden="true"></span><span id="preview-color">White</span></span></div>
+        <div class="preview-topline"><span class="preview-label">SABLUTE LD-135</span><span class="preview-state"><span class="preview-dot" aria-hidden="true"></span><span class="preview-color-option" data-color="white" id="preview-color">White</span><span class="preview-color-option" data-color="blue">Blue</span><span class="preview-color-option" data-color="red">Red</span><span class="preview-color-option" data-color="green">Green</span><span class="preview-color-option" data-color="cyan">Cyan</span><span class="preview-color-option" data-color="yellow">Yellow</span><span class="preview-color-option" data-color="pink">Pink</span></span></div>
         <div class="keyboard-wrap">
           <div class="keyboard" aria-hidden="true">
             <div class="keyboard-top"><span class="keyboard-brand">LD · 135</span><span class="keyboard-lights">● &nbsp; ● &nbsp; ●</span></div>
@@ -61,14 +62,31 @@
             <div class="key-row"><span class="key-mod">ctrl</span><span class="fn-key">fn</span><span class="key-mod">alt</span><span class="key-space"></span><span class="key-mod">alt</span><span>←</span><span>↑</span><span>↓</span><span>→</span></div>
           </div>
         </div>
-        <div class="preview-controls" hidden>
+        <div class="preview-controls">
           <p>White by default.<br><strong>Still yours to change.</strong></p>
           <div class="preview-buttons">
-            <button class="button button-small" id="cycle-color" type="button" aria-label="Cycle the keyboard preview color">Try <kbd>fn</kbd> + <kbd>2</kbd></button>
-            <button class="preview-reset" id="reset-color" type="button">Back to white <span aria-hidden="true">↺</span></button>
+            <button class="button button-small" id="cycle-color" type="button" popovertarget="color-picker" aria-label="Choose the keyboard preview color">Try <kbd>fn</kbd> + <kbd>2</kbd></button>
+            <button class="preview-reset" id="reset-color" type="reset" form="preview-palette">Back to white <span aria-hidden="true">↺</span></button>
           </div>
         </div>
-        <p class="preview-caption">Illustration of the backlight. <span class="interactive-caption" hidden>Interactive preview only; it doesn’t control your keyboard.</span></p>
+        <p class="preview-caption">Illustration of the backlight. <span class="interactive-caption">Interactive preview only; it doesn’t control your keyboard.</span></p>
+        <div class="native-popover" id="color-picker" popover aria-labelledby="color-picker-title">
+          <form id="preview-palette">
+            <fieldset>
+              <legend id="color-picker-title">Keyboard preview color</legend>
+              <div class="color-options">
+                <label><input type="radio" name="preview-color" value="white" checked> White</label>
+                <label><input type="radio" name="preview-color" value="blue"> Blue</label>
+                <label><input type="radio" name="preview-color" value="red"> Red</label>
+                <label><input type="radio" name="preview-color" value="green"> Green</label>
+                <label><input type="radio" name="preview-color" value="cyan"> Cyan</label>
+                <label><input type="radio" name="preview-color" value="yellow"> Yellow</label>
+                <label><input type="radio" name="preview-color" value="pink"> Pink</label>
+              </div>
+            </fieldset>
+            <button class="button button-small" type="button" popovertarget="color-picker" popovertargetaction="hide">Done</button>
+          </form>
+        </div>
         <p class="visually-hidden" id="preview-announcement" role="status" aria-live="polite"></p>
       </div>
     </section>
@@ -116,16 +134,21 @@
       <div class="section-heading"><p class="eyebrow">One setup. A calmer start.</p><h2 id="install-title">Make white your default.</h2><p>Clone the source, install the system helper, then enable autostart for your own desktop account. No pip packages needed.</p></div>
       <div class="install-layout">
         <div>
-          <div class="code-card"><div class="code-toolbar"><span><span class="terminal-mark" aria-hidden="true">&gt;_</span> Terminal</span><button class="copy-button" type="button" data-copy="install-code" hidden>Copy commands</button></div><pre><code id="install-code">git clone https://github.com/bell-kevin/sablute-ld135-linux-backlight.git
+          <div class="code-card"><div class="code-toolbar"><span><span class="terminal-mark" aria-hidden="true">&gt;_</span> Terminal</span><button class="copy-button" type="button" data-copy="install-code" popovertarget="copy-help">Copy commands</button></div><pre><code id="install-code">git clone https://github.com/bell-kevin/sablute-ld135-linux-backlight.git
 cd sablute-ld135-linux-backlight
 sudo python3 install_keyboard_white.py --system install
 python3 install_keyboard_white.py --autostart enable</code></pre></div>
           <p class="install-note">Run the last command as your regular user. The system step needs administrator access to install the helper and the rule for the matching HID interface.</p>
           <div class="install-links"><a class="text-link" href="https://github.com/bell-kevin/sablute-ld135-linux-backlight/blob/main/README.md">Full installation guide <span aria-hidden="true">↗</span></a><span>Preview either installer step with <code>--dry-run</code>.</span></div>
         </div>
-        <aside class="install-aside" aria-labelledby="after-install"><h3 id="after-install">Whenever you need it.</h3><p>Set white immediately after installation:</p><div class="inline-command"><code id="manual-code">ld135-white</code><button class="copy-button" type="button" data-copy="manual-code" aria-label="Copy the manual white command" hidden>Copy</button></div><p>At your next graphical login, the same helper runs automatically and exits.</p><p class="small-note">The default is white. The rest of the day is up to you.</p></aside>
+        <aside class="install-aside" aria-labelledby="after-install"><h3 id="after-install">Whenever you need it.</h3><p>Set white immediately after installation:</p><div class="inline-command"><code id="manual-code">ld135-white</code><button class="copy-button" type="button" data-copy="manual-code" popovertarget="copy-help" aria-label="Copy the manual white command">Copy</button></div><p>At your next graphical login, the same helper runs automatically and exits.</p><p class="small-note">The default is white. The rest of the day is up to you.</p></aside>
       </div>
-      <div class="undo-section"><div><h3>Easy to turn off.</h3><p>From the cloned repository, disable the login entry. The manual command stays available.</p></div><div class="inline-command light-command"><code id="disable-code">python3 install_keyboard_white.py --autostart disable</code><button class="copy-button" type="button" data-copy="disable-code" aria-label="Copy the disable autostart command" hidden>Copy</button></div></div>
+      <div class="undo-section"><div><h3>Easy to turn off.</h3><p>From the cloned repository, disable the login entry. The manual command stays available.</p></div><div class="inline-command light-command"><code id="disable-code">python3 install_keyboard_white.py --autostart disable</code><button class="copy-button" type="button" data-copy="disable-code" popovertarget="copy-help" aria-label="Copy the disable autostart command">Copy</button></div></div>
+      <div class="native-popover" id="copy-help" popover aria-labelledby="copy-help-title">
+        <h3 id="copy-help-title">Copy a command</h3>
+        <p>Select the command text, then use your browser’s Copy action or press <kbd>Ctrl</kbd> + <kbd>C</kbd> (<kbd>⌘</kbd> + <kbd>C</kbd> on macOS).</p>
+        <button class="button button-small" type="button" popovertarget="copy-help" popovertargetaction="hide">Got it</button>
+      </div>
       <p class="visually-hidden" id="copy-announcement" role="status" aria-live="polite"></p>
     </section>
 
