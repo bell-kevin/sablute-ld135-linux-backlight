@@ -4,10 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#f5f5ef">
   <meta name="description" content="A small Linux helper that sets the SABLUTE LD-135 keyboard to white at graphical login. Keeps your brightness and Fn + 2 controls. No background process or Python dependencies.">
   <link rel="canonical" href="https://bell-kevin.github.io/sablute-ld135-linux-backlight/">
   <title>LD-135 Backlight — White when you sign in.</title>
+  <script src="theme.js"></script>
   <link rel="stylesheet" href="styles.css">
   <script src="site.js" defer></script>
 </head>
@@ -23,6 +25,14 @@
       <a href="#compatibility">Compatibility</a>
       <a class="nav-source" href="https://github.com/bell-kevin/sablute-ld135-linux-backlight">Source <span aria-hidden="true">↗</span></a>
     </nav>
+    <label class="theme-control" hidden>
+      <span>Theme</span>
+      <select id="theme-select" aria-label="Website theme">
+        <option value="auto">Auto</option>
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+      </select>
+    </label>
   </header>
 
   <main id="main">

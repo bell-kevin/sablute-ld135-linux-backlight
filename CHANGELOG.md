@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Add Auto, Dark, and Light website themes. Auto follows the operating system;
+  explicit preferences are remembered for future visits.
+
 ## 0.1.0 — 2026-09-16
 
 - Set the tested SABLUTE LD-135 (`30fa:2052`) to steady white with a single runtime
