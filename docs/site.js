@@ -32,7 +32,8 @@ document.getElementById("cycle-color").addEventListener("click", () => {
 document.getElementById("reset-color").addEventListener("click", () => showColor(0));
 
 // Commands remain visible and selectable when JavaScript or clipboard access
-// is unavailable. No requests, analytics, storage, or device APIs are used.
+// is unavailable. Only the website theme preference is stored locally;
+// no requests, analytics, or device APIs are used.
 if (navigator.clipboard && window.isSecureContext) {
   document.querySelectorAll("[data-copy]").forEach((button) => {
     button.hidden = false;
